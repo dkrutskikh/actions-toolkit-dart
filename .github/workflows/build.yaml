@@ -1,0 +1,79 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  stable-dart:
+    name: Build on stable dart
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "stable"
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: dart pub get
+      - name: Run dependency validator
+        run: |
+          dart pub global activate dependency_validator
+          dart pub global run dependency_validator:dependency_validator
+      - name: Analyze project
+        run: dart analyze --fatal-warnings --fatal-infos .
+      - name: Verify formatting
+        run: dart format --set-exit-if-changed .
+
+  minimal-dart:
+    name: Build on minimal supported 2.12 dart
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "2.12.4"
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pub downgrade
+      - name: Analyze project
+        run: dartanalyzer --fatal-warnings --fatal-infos --fatal-lints lib/ test/
+
+  beta-dart:
+    name: Build on beta dart
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "beta"
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: dart pub upgrade
+      - name: Analyze project
+        run: dart analyze --fatal-warnings --fatal-infos .
+
+  package-analysis:
+    name: Compute the package score on pub.dev site.
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: axel-op/dart-package-analyzer@v3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: dart-code-metrics
+        uses: dart-code-checker/dart-code-metrics-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          folders: "lib"
