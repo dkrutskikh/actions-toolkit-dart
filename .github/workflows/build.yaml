@@ -31,6 +31,17 @@ jobs:
         run: dart analyze --fatal-warnings --fatal-infos .
       - name: Verify formatting
         run: dart format --set-exit-if-changed .
+      - name: Run tests
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+        if: success()
+        run: |
+          dart test --coverage=coverage
+          dart pub run coverage:format_coverage --packages=.packages -i coverage -o coverage/coverage.lcov --lcov --report-on=lib
+          dart run tool/uncovered_coverage.dart
+          dart test test/fake_test.dart --coverage=coverage
+          dart pub run coverage:format_coverage --packages=.packages -i coverage -o coverage/coverage.lcov --lcov --report-on=lib
+          bash <(curl -s https://codecov.io/bash) -f coverage/coverage.lcov
 
   minimal-dart:
     name: Build on minimal supported 2.12 dart
@@ -46,6 +57,8 @@ jobs:
         run: pub downgrade
       - name: Analyze project
         run: dartanalyzer --fatal-warnings --fatal-infos --fatal-lints lib/ test/
+      - name: Run tests
+        run: pub run test
 
   beta-dart:
     name: Build on beta dart
@@ -61,6 +74,8 @@ jobs:
         run: dart pub upgrade
       - name: Analyze project
         run: dart analyze --fatal-warnings --fatal-infos .
+      - name: Run tests
+        run: dart test
 
   package-analysis:
     name: Compute the package score on pub.dev site.
@@ -72,8 +87,17 @@ jobs:
       - uses: axel-op/dart-package-analyzer@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+  dart-code-metrics:
+    name: Additional scan the package by Dart Code Metrics
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
       - name: dart-code-metrics
         uses: dart-code-checker/dart-code-metrics-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          folders: "lib"
+          folders: "example, lib, test"
