@@ -18,6 +18,21 @@ void main() {
       core.setupOutput(IOSinkMock());
     });
 
+    test('setFailed sets the correct exit code and failure message', () {
+      core.setFailed('Failure message');
+      expect(exitCode, equals(1));
+
+      core.setFailed('Failure \r\n\nmessage\r');
+
+      expect(
+        verify(() => core.output.writeln(captureAny())).captured,
+        equals([
+          '::error::Failure message',
+          '::error::Failure %0D%0A%0Amessage%0D',
+        ]),
+      );
+    });
+
     test('isDebug check debug state', () {
       core.setupEnvironmentVariables({});
       expect(core.isDebug(), isFalse);
