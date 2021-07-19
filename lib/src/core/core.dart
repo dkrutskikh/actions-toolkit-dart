@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'command.dart';
@@ -73,3 +74,19 @@ Future<T?> group<T>(String name, Future<T> Function() fn) async {
 
   return result;
 }
+
+//-----------------------------------------------------------------------
+// Wrapper action state
+//-----------------------------------------------------------------------
+
+/// Saves state for current action, the state can only be retrieved by this action's post job execution.
+void saveState(String name, Object value) {
+  issueCommand(
+    'save-state',
+    {'name': name},
+    value is String ? value : jsonEncode(value),
+  );
+}
+
+/// Gets the value of an state set by this action's main execution.
+String getState(String name) => environmentVariables['STATE_$name'] ?? '';
