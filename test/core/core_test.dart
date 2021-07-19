@@ -12,10 +12,16 @@ class IOSinkMock extends Mock implements IOSink {}
 
 const message = 'simple message';
 
+const testEnvVars = {
+  // Save inputs
+  'STATE_TEST_1': 'state_val',
+};
+
 void main() {
   group('core', () {
     setUp(() {
       core.setupOutput(IOSinkMock());
+      core.setupEnvironmentVariables(testEnvVars);
     });
 
     test('setFailed sets the correct exit code and failure message', () {
@@ -134,5 +140,43 @@ void main() {
         equals(['::group::mygroup', 'in my group\n', '::endgroup::']),
       );
     });
+
+    test('saveState produces the correct command', () {
+      core.saveState('state_1', 'some value');
+
+      expect(
+        verify(() => core.output.writeln(captureAny())).captured.single,
+        equals('::save-state name=state_1::some value'),
+      );
+    });
+
+    test('saveState handles numbers', () {
+      core.saveState('state_1', 1);
+
+      expect(
+        verify(() => core.output.writeln(captureAny())).captured.single,
+        equals('::save-state name=state_1::1'),
+      );
+    });
+
+    test('saveState handles numbers', () {
+      core.saveState('state_1', true);
+
+      expect(
+        verify(() => core.output.writeln(captureAny())).captured.single,
+        equals('::save-state name=state_1::true'),
+      );
+    });
+
+    test('getState gets wrapper action state', () {
+      expect(
+        core.getState('TEST_1'),
+        equals('state_val'),
+      );
+    });
+
+//  it('getState gets wrapper action state', () => {
+//    expect(core.getState('TEST_1')).toBe('state_val')
+//  })
   });
 }
