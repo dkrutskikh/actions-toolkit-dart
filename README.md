@@ -4,6 +4,8 @@
 
 # Actions Toolkit for Dart
 
+A third-party toolkit for [GitHub Actions](https://help.github.com/en/actions) written in Dart. This is port of the official [`actions/toolkit`](https://github.com/actions/toolkit/).
+
 ## core
 
 > Core functions for setting results, logging, registering secrets and exporting variables across actions.
@@ -14,6 +16,22 @@
 
 ```dart
 import 'package:actions_toolkit_dart/core.dart' as core;
+```
+
+##### Exit codes
+
+You should use this library to set the failing exit code for your action.  If status is not set and the script runs to completion, that will lead to a success.
+
+```dart
+import 'package:actions_toolkit_dart/core.dart' as core;
+
+try {
+  // Do stuff
+}
+catch (err) {
+  // setFailed logs the message and sets a failing exit code
+  core.setFailed('Action failed with error $err');
+}
 ```
 
 ##### Logging

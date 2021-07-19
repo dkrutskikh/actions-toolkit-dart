@@ -1,6 +1,22 @@
+import 'dart:io';
+
 import 'command.dart';
 import 'environment_variables.dart';
+import 'exit_code.dart';
 import 'output.dart';
+
+//-----------------------------------------------------------------------
+// Results
+//-----------------------------------------------------------------------
+
+/// Sets the action status to failed.
+///
+/// When the action exits it will be with an exit code of 1
+void setFailed(String message) {
+  exitCode = ExitCode.failure;
+
+  error(message);
+}
 
 //-----------------------------------------------------------------------
 // Logging Commands
