@@ -18,13 +18,49 @@ A third-party toolkit for [GitHub Actions](https://help.github.com/en/actions) w
 import 'package:actions_toolkit_dart/core.dart' as core;
 ```
 
+##### Inputs/Outputs
+
+Action inputs can be read with `getInput` which returns a `string` or `getBooleanInput` which parses a boolean based on the [YAML 1.2 specification](https://yaml.org/spec/1.2/spec.html#id2804923). If `required` set to be false, the input should have a default value in `action.yml`.
+
+Outputs can be set with `setOutput` which makes them available to be mapped into inputs of other actions to ensure they are decoupled.
+
+```dart
+final myInput = core.getInput(name: 'inputName', options: const core.InputOptions(required: true));
+final myBooleanInput = core.getBooleanInput(name: 'booleanInputName', options: const core.InputOptions(required: true));
+final myMultilineInput = core.getMultilineInput(name: 'multilineInputName', options: const core.InputOptions(required: true));
+
+core.setOutput(name: 'outputKey', value: 'outputVal');
+```
+
+##### Exporting variables
+
+Since each step runs in a separate process, you can use `exportVariable` to add it to this step and future steps environment blocks.
+
+```dart
+core.exportVariable(name: 'envVar', value: 'Val');
+```
+
+##### Setting a secret
+
+Setting a secret registers the secret with the runner to ensure it is masked in logs.
+
+```dart
+core.setSecret(secret: 'myPassword');
+```
+
+#### PATH Manipulation
+
+To make a tool's path available in the path for the remainder of the job (without altering the machine or containers state), use `addPath`.  The runner will prepend the path given to the jobs PATH.
+
+```dart
+core.addPath('/path/to/my_tool');
+```
+
 ##### Exit codes
 
 You should use this library to set the failing exit code for your action.  If status is not set and the script runs to completion, that will lead to a success.
 
 ```dart
-import 'package:actions_toolkit_dart/core.dart' as core;
-
 try {
   // Do stuff
 }

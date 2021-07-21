@@ -14,6 +14,18 @@ void issue(String name, [String message = '']) {
   issueCommand(name, {}, message);
 }
 
+/// Representation of GitHub action command
+///
+/// Command Format:
+/// ```
+///   ::name key=value,key=value::message
+/// ```
+///
+/// Examples:
+/// ```
+///   ::warning::This is the message
+///   ::set-env name=MY_VAR::some value
+/// ```
 class Command {
   final String command;
   final String message;
@@ -29,17 +41,11 @@ class Command {
     final cmdStr = StringBuffer()..write(cmdString)..write(command);
 
     if (properties.isNotEmpty) {
-      cmdStr.write(' ');
-      var first = true;
-      for (final entry in properties.entries) {
-        if (first) {
-          first = false;
-        } else {
-          cmdStr.write(',');
-        }
-
-        cmdStr.write('${entry.key}=${escapeProperty(entry.value)}');
-      }
+      cmdStr
+        ..write(' ')
+        ..write(properties.entries
+            .map((prop) => '${prop.key}=${escapeProperty(prop.value)}')
+            .join(','));
     }
 
     cmdStr.write('$cmdString${escapeData(message)}');
