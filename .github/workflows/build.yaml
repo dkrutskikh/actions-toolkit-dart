@@ -99,5 +99,6 @@ jobs:
       - name: dart-code-metrics
         uses: dart-code-checker/dart-code-metrics-action@v1
         with:
+          check_unused_files: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           folders: "example, lib, test"
