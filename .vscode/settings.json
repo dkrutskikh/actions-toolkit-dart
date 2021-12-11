@@ -1,7 +1,13 @@
 {
     "cSpell.words": [
+        "bools",
+        "cyclomatic",
         "dartanalyzer",
+        "dkrutskikh",
+        "ints",
         "mocktail",
-        "prepend"
+        "prepend",
+        "todos",
+        "unawaited"
     ]
 }
