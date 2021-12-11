@@ -38,7 +38,9 @@ class Command {
   String toString() {
     const cmdString = '::';
 
-    final cmdStr = StringBuffer()..write(cmdString)..write(command);
+    final cmdStr = StringBuffer()
+      ..write(cmdString)
+      ..write(command);
 
     if (properties.isNotEmpty) {
       cmdStr

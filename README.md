@@ -1,6 +1,10 @@
 [![Build Status](https://shields.io/github/workflow/status/dkrutskikh/actions-toolkit-dart/build?logo=github&logoColor=white)](https://github.com/dkrutskikh/actions-toolkit-dart/)
 [![Coverage Status](https://img.shields.io/codecov/c/github/dkrutskikh/actions-toolkit-dart?logo=codecov&logoColor=white)](https://codecov.io/gh/dkrutskikh/actions-toolkit-dart/)
+[![Pub Version](https://img.shields.io/pub/v/actions_toolkit_dart?logo=dart&logoColor=white)](https://pub.dev/packages/actions_toolkit_dart/)
+[![Dart SDK Version](https://badgen.net/pub/sdk-version/actions_toolkit_dart)](https://pub.dev/packages/actions_toolkit_dart/)
 [![License](https://img.shields.io/github/license/dkrutskikh/actions-toolkit-dart)](https://github.com/dkrutskikh/actions-toolkit-dart/blob/master/LICENSE)
+[![Pub popularity](https://badgen.net/pub/popularity/actions_toolkit_dart)](https://pub.dev/packages/actions_toolkit_dart/score)
+[![GitHub popularity](https://img.shields.io/github/stars/dkrutskikh/actions-toolkit-dart?logo=github&logoColor=white)](https://github.com/dkrutskikh/actions-toolkit-dart/stargazers)
 
 # Actions Toolkit for Dart
 
