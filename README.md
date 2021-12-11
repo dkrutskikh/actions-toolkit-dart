@@ -16,6 +16,21 @@ A third-party toolkit for [GitHub Actions](https://help.github.com/en/actions) w
 
 ### Usage
 
+#### Installation
+
+```sh
+$ dart pub add actions_toolkit_dart
+```
+
+**OR**
+
+add it manually to `pubspec.yaml`
+
+```yaml
+dependencies:
+  actions_toolkit_dart: ^0.2.0
+```
+
 #### Import the package
 
 ```dart
@@ -119,7 +134,7 @@ const result = await core.group('Do something async', () async {
 
 ##### Annotations
 
-This library has 3 methods that will produce [annotations](https://docs.github.com/en/rest/reference/checks#create-a-check-run). 
+This library has 3 methods that will produce [annotations](https://docs.github.com/en/rest/reference/checks#create-a-check-run).
 
 ```dart
 core.error('This is a bad error. This will also fail the build.');

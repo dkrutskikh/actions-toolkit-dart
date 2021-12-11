@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.20
+## 0.2.0
 
 * feat: added support for notice annotations and more annotation fields
 
