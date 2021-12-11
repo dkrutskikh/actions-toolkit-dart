@@ -1,6 +1,7 @@
 @TestOn('vm')
 import 'dart:io';
 
+import 'package:actions_toolkit_dart/src/core/annotation_properties.dart';
 import 'package:actions_toolkit_dart/src/core/core.dart' as core;
 import 'package:actions_toolkit_dart/src/core/environment_variables.dart'
     as core;
@@ -343,6 +344,17 @@ void main() {
       core.error(message: 'Error message');
       core.error(message: 'Error message\r\n\n');
       core.error(message: '');
+      core.error(
+        message: 'this is my error message',
+        properties: const AnnotationProperties(
+          title: 'A title',
+          file: 'root/test.txt',
+          startLine: 5,
+          endLine: 5,
+          startColumn: 1,
+          endColumn: 2,
+        ),
+      );
 
       expect(
         verify(() => core.output.writeln(captureAny())).captured,
@@ -351,6 +363,7 @@ void main() {
           '::error::Error message',
           '::error::Error message%0D%0A%0A',
           '::error::',
+          '::error title=A title,file=root/test.txt,line=5,endLine=5,col=1,endColumn=2::this is my error message',
         ]),
       );
     });
@@ -360,6 +373,17 @@ void main() {
       core.warning(message: 'Warning');
       core.warning(message: '\r\nwarning\n');
       core.warning(message: '');
+      core.warning(
+        message: 'this is my warning message',
+        properties: const AnnotationProperties(
+          title: 'A title',
+          file: 'root/test.txt',
+          startLine: 5,
+          endLine: 5,
+          startColumn: 1,
+          endColumn: 2,
+        ),
+      );
 
       expect(
         verify(() => core.output.writeln(captureAny())).captured,
@@ -368,6 +392,36 @@ void main() {
           '::warning::Warning',
           '::warning::%0D%0Awarning%0A',
           '::warning::',
+          '::warning title=A title,file=root/test.txt,line=5,endLine=5,col=1,endColumn=2::this is my warning message',
+        ]),
+      );
+    });
+
+    test('notice logs passed message', () {
+      core.notice(message: '');
+      core.notice(message: 'Notice');
+      core.notice(message: '\r\nnotice\n');
+      core.notice(message: '');
+      core.notice(
+        message: 'this is my notice message',
+        properties: const AnnotationProperties(
+          title: 'A title',
+          file: 'root/test.txt',
+          startLine: 5,
+          endLine: 5,
+          startColumn: 1,
+          endColumn: 2,
+        ),
+      );
+
+      expect(
+        verify(() => core.output.writeln(captureAny())).captured,
+        equals([
+          '::notice::',
+          '::notice::Notice',
+          '::notice::%0D%0Anotice%0A',
+          '::notice::',
+          '::notice title=A title,file=root/test.txt,line=5,endLine=5,col=1,endColumn=2::this is my notice message',
         ]),
       );
     });

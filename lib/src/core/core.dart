@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
+import 'annotation_properties.dart';
 import 'command.dart';
 import 'environment_variables.dart';
 import 'exit_code.dart';
@@ -103,10 +104,7 @@ bool getBooleanInput({
 }
 
 /// Sets the value of an output.
-void setOutput({
-  required String name,
-  required Object value,
-}) {
+void setOutput({required String name, required Object value}) {
   output.writeln('');
 
   issueCommand(
@@ -148,14 +146,19 @@ void debug({required String message}) {
   issueCommand('debug', {}, message);
 }
 
-/// Adds an error [message]
-void error({required String message}) {
-  issue('error', message);
+/// Adds an error [message] with optional [properties]
+void error({required String message, AnnotationProperties? properties}) {
+  issueCommand('error', toCommandProperties(properties), message);
 }
 
-/// Adds an warning [message]
-void warning({required String message}) {
-  issue('warning', message);
+/// Adds an warning [message] with optional [properties]
+void warning({required String message, AnnotationProperties? properties}) {
+  issueCommand('warning', toCommandProperties(properties), message);
+}
+
+/// Adds a notice issue [message] with optional [properties]
+void notice({required String message, AnnotationProperties? properties}) {
+  issueCommand('notice', toCommandProperties(properties), message);
 }
 
 /// Writes info [message] to log with console.log.
