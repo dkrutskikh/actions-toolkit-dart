@@ -52,7 +52,7 @@ Setting a secret registers the secret with the runner to ensure it is masked in 
 core.setSecret(secret: 'myPassword');
 ```
 
-#### PATH Manipulation
+##### PATH Manipulation
 
 To make a tool's path available in the path for the remainder of the job (without altering the machine or containers state), use `addPath`.  The runner will prepend the path given to the jobs PATH.
 
@@ -92,6 +92,8 @@ try {
 
   // Do stuff
   core.info('Output to the actions build log');
+
+  core.notice('This is a message that will also emit an annotation');
 }
 catch (err) {
   core.error('Error $err, action may still succeed though');
@@ -114,3 +116,17 @@ const result = await core.group('Do something async', () async {
   return response;
 });
 ```
+
+##### Annotations
+
+This library has 3 methods that will produce [annotations](https://docs.github.com/en/rest/reference/checks#create-a-check-run). 
+
+```dart
+core.error('This is a bad error. This will also fail the build.');
+
+core.warning("Something went wrong, but it's not bad enough to fail the build.");
+
+core.notice('Something happened that you might want to know about.');
+```
+
+These will surface to the UI in the Actions page and on Pull Requests.
