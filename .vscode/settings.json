@@ -4,11 +4,14 @@
         "cyclomatic",
         "dartanalyzer",
         "dkrutskikh",
+        "endgroup",
         "ints",
+        "lcov",
         "mocktail",
         "prepend",
         "pubspec",
         "todos",
-        "unawaited"
+        "unawaited",
+        "writeln"
     ]
 }

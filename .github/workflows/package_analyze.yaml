@@ -1,12 +1,32 @@
 name: "Analyze the package"
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
+    paths:
+      - "bin/**"
+      - "example/**"
+      - "lib/**"
+      - "test/**"
+      - "tool/**"
+      - ".github/workflows/package_analyze.yaml"
+      - "analysis_options.yaml"
+      - "dart_dependency_validator.yaml"
+      - "pubspec.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - "bin/**"
+      - "example/**"
+      - "lib/**"
+      - "test/**"
+      - "tool/**"
+      - ".github/workflows/package_analyze.yaml"
+      - "analysis_options.yaml"
+      - "dart_dependency_validator.yaml"
+      - "pubspec.yaml"
 
 jobs:
   analysis:
@@ -39,10 +59,13 @@ jobs:
         run: dart analyze --fatal-warnings --fatal-infos .
 
       - name: Analyze by Dart Code Metrics
-        uses: dart-code-checker/dart-code-metrics-action@v1
+        uses: dart-code-checker/dart-code-metrics-action@v1.4.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           folders: "lib, test"
+          check_unused_files: true
+          check_unused_files_folders: "lib"
+          pull_request_comment: true
 
       - name: Verify formatting
         run: dart format --set-exit-if-changed .
@@ -102,14 +125,20 @@ jobs:
 
       - name: Disable unsupported rules
         run: |
+          sed -i'.original' 's/- avoid_final_parameters/#    - avoid_final_parameters/g' analysis_options.yaml
           sed -i'.original' 's/- avoid_multiple_declarations_per_line/#    - avoid_multiple_declarations_per_line/g' analysis_options.yaml
+          sed -i'.original' 's/- conditional_uri_does_not_exist/#    - conditional_uri_does_not_exist/g' analysis_options.yaml
           sed -i'.original' 's/- depend_on_referenced_packages/#    - depend_on_referenced_packages/g' analysis_options.yaml
           sed -i'.original' 's/- deprecated_consistency/#    - deprecated_consistency/g' analysis_options.yaml
           sed -i'.original' 's/- eol_at_end_of_file/#    - eol_at_end_of_file/g' analysis_options.yaml
           sed -i'.original' 's/- library_private_types_in_public_api/#    - library_private_types_in_public_api/g' analysis_options.yaml
           sed -i'.original' 's/- noop_primitive_operations/#    - noop_primitive_operations/g' analysis_options.yaml
+          sed -i'.original' 's/- no_leading_underscores_for_library_prefixes/#    - no_leading_underscores_for_library_prefixes/g' analysis_options.yaml
+          sed -i'.original' 's/- no_leading_underscores_for_local_identifiers/#    - no_leading_underscores_for_local_identifiers/g' analysis_options.yaml
           sed -i'.original' 's/- prefer_null_aware_method_calls/#    - prefer_null_aware_method_calls/g' analysis_options.yaml
+          sed -i'.original' 's/- secure_pubspec_urls/#    - secure_pubspec_urls/g' analysis_options.yaml
           sed -i'.original' 's/- unnecessary_constructor_name/#    - unnecessary_constructor_name/g' analysis_options.yaml
+          sed -i'.original' 's/- unnecessary_late/#    - unnecessary_late/g' analysis_options.yaml
           sed -i'.original' 's/- use_build_context_synchronously/#    - use_build_context_synchronously/g' analysis_options.yaml
           sed -i'.original' 's/- use_if_null_to_convert_nulls_to_bools/#    - use_if_null_to_convert_nulls_to_bools/g' analysis_options.yaml
           sed -i'.original' 's/- use_named_constants/#    - use_named_constants/g' analysis_options.yaml
