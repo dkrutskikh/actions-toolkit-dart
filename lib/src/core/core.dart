@@ -29,7 +29,7 @@ void exportVariable({required String name, required Object value}) {
 }
 
 /// Registers a secret which will get masked from logs
-void setSecret({required String secret}) {
+void setSecret(String secret) {
   issueCommand('add-mask', {}, secret);
 }
 

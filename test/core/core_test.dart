@@ -111,7 +111,7 @@ void main() {
     });
 
     test('setSecret produces the correct command', () {
-      core.setSecret(secret: 'secret val');
+      core.setSecret('secret val');
 
       expect(
         verify(() => core.output.writeln(captureAny())).captured.single,
@@ -457,7 +457,7 @@ void main() {
 
     test('group wraps an async call in a group', () async {
       final result = await core.group(
-        name: 'mygroup',
+        name: 'myGroup',
         fn: () async {
           core.info(message: 'in my group\n');
 
@@ -468,7 +468,7 @@ void main() {
       expect(result, isTrue);
       expect(
         verify(() => core.output.writeln(captureAny())).captured,
-        equals(['::group::mygroup', 'in my group\n', '::endgroup::']),
+        equals(['::group::myGroup', 'in my group\n', '::endgroup::']),
       );
     });
 

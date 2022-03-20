@@ -28,7 +28,7 @@ add it manually to `pubspec.yaml`
 
 ```yaml
 dependencies:
-  actions_toolkit_dart: ^0.2.0
+  actions_toolkit_dart: ^0.3.0
 ```
 
 #### Import the package
@@ -64,7 +64,7 @@ core.exportVariable(name: 'envVar', value: 'Val');
 Setting a secret registers the secret with the runner to ensure it is masked in logs.
 
 ```dart
-core.setSecret(secret: 'myPassword');
+core.setSecret('myPassword');
 ```
 
 ##### PATH Manipulation
