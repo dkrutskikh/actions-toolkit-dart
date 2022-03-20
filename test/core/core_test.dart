@@ -111,7 +111,7 @@ void main() {
     });
 
     test('setSecret produces the correct command', () {
-      core.setSecret(secret: 'secret val');
+      core.setSecret('secret val');
 
       expect(
         verify(() => core.output.writeln(captureAny())).captured.single,

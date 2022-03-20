@@ -1,5 +1,5 @@
 name: actions_toolkit_dart
-version: 0.2.0
+version: 0.3.0
 description: The GitHub ToolKit for developing GitHub Actions in Dart.
 repository: https://github.com/dkrutskikh/actions-toolkit-dart
 issue_tracker: https://github.com/dkrutskikh/actions-toolkit-dart/issues
