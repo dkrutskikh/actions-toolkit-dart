@@ -26,13 +26,13 @@ void main() {
     });
 
     test('command escapes message', () {
-      // Verify replaces each instance, not just first instance
+      // Verify replaces each instance, not just first instance.
       core.issueCommand(
         'some-command',
         {},
         'percent % percent % cr \r cr \r lf \n lf \n',
       );
-      // Verify literal escape sequences
+      // Verify literal escape sequences.
       core.issueCommand('some-command', {}, '%25 %25 %0D %0D %0A %0A');
 
       expect(
@@ -45,7 +45,7 @@ void main() {
     });
 
     test('command escapes property', () {
-      // Verify replaces each instance, not just first instance
+      // Verify replaces each instance, not just first instance.
       core.issueCommand(
         'some-command',
         {
@@ -54,7 +54,7 @@ void main() {
         },
         '',
       );
-      // Verify literal escape sequences
+      // Verify literal escape sequences.
       core.issueCommand(
         'some-command',
         {},

@@ -8,10 +8,12 @@
         "ints",
         "lcov",
         "mocktail",
+        "nullsafety",
         "prepend",
         "pubspec",
         "todos",
         "unawaited",
-        "writeln"
+        "writeln",
+        "_GitHubActionsFileCommandDelimeter_"
     ]
 }

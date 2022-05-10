@@ -18,7 +18,7 @@ const message = 'simple message';
 final testEnvVars = {
   'PATH': 'path1${p.context.separator}path2',
 
-  // Set inputs
+  // Set inputs.
   'INPUT_MY_INPUT': 'val',
   'INPUT_MISSING': '',
   'INPUT_SPECIAL_CHARS_\'\t"\\': '\'\t"\\ response ',
@@ -34,10 +34,10 @@ final testEnvVars = {
 
   'INPUT_MY_INPUT_LIST': 'val1\nval2\n\nval3',
 
-  // Save inputs
+  // Save inputs.
   'STATE_TEST_1': 'state_val',
 
-  // File Commands
+  // File Commands.
   'GITHUB_PATH': '',
   'GITHUB_ENV': '',
 };
