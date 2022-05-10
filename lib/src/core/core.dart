@@ -12,7 +12,7 @@ import 'input_options.dart';
 import 'output.dart';
 import 'utils.dart';
 
-/// Sets env variable for this action and future actions in the job
+/// Sets env variable for this action and future actions in the job.
 void exportVariable({required String name, required Object value}) {
   final convertedVal = toCommandValue(value);
   environmentVariables[name] = convertedVal;
@@ -20,15 +20,16 @@ void exportVariable({required String name, required Object value}) {
   final filePath = environmentVariables['GITHUB_ENV'] ?? '';
   if (filePath.isNotEmpty) {
     const delimiter = '_GitHubActionsFileCommandDelimeter_';
+    final separator = p.context.separator;
     final commandValue =
-        '$name<<$delimiter${p.context.separator}$convertedVal${p.context.separator}$delimiter';
+        '$name<<$delimiter$separator$convertedVal$separator$delimiter';
     issueFileCommand('ENV', commandValue);
   } else {
     issueCommand('set-env', {'name': name}, convertedVal);
   }
 }
 
-/// Registers a secret which will get masked from logs
+/// Registers a secret which will get masked from logs.
 void setSecret(String secret) {
   issueCommand('add-mask', {}, secret);
 }
@@ -71,14 +72,11 @@ String getInput({
 Iterable<String> getMultilineInput({
   required String name,
   InputOptions options = const InputOptions(),
-}) {
-  final inputs = getInput(name: name, options: options)
-      .split('\n')
-      .where((value) => value.isNotEmpty)
-      .toList();
-
-  return inputs;
-}
+}) =>
+    getInput(name: name, options: options)
+        .split('\n')
+        .where((value) => value.isNotEmpty)
+        .toList();
 
 /// Gets the input value of the boolean type in the [YAML 1.2](https://yaml.org/spec/1.2/spec.html#id2804923) "core schema" specification.
 ///
@@ -141,22 +139,22 @@ void setFailed({required String message}) {
 /// Gets whether Actions Step Debug is on or not
 bool isDebug() => environmentVariables['RUNNER_DEBUG'] == '1';
 
-/// Writes debug [message] to user log
+/// Writes debug [message] to user log.
 void debug({required String message}) {
   issueCommand('debug', {}, message);
 }
 
-/// Adds an error [message] with optional [properties]
+/// Adds an error [message] with optional [properties].
 void error({required String message, AnnotationProperties? properties}) {
   issueCommand('error', toCommandProperties(properties), message);
 }
 
-/// Adds an warning [message] with optional [properties]
+/// Adds an warning [message] with optional [properties].
 void warning({required String message, AnnotationProperties? properties}) {
   issueCommand('warning', toCommandProperties(properties), message);
 }
 
-/// Adds a notice issue [message] with optional [properties]
+/// Adds a notice issue [message] with optional [properties].
 void notice({required String message, AnnotationProperties? properties}) {
   issueCommand('notice', toCommandProperties(properties), message);
 }

@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-/// Interface for getInput options
+/// Interface for getInput options.
 @immutable
 class InputOptions {
   /// Whether the input is required.
