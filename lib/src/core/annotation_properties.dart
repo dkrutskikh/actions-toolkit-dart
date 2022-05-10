@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-/// Optional properties that can be sent with annotatation commands (notice, error, and warning)
+/// Optional properties that can be sent with annotation commands (notice, error, and warning)
 ///
 /// See: https://docs.github.com/en/rest/reference/checks#create-a-check-run for
 /// more information about annotations.

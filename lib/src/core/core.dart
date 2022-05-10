@@ -34,9 +34,7 @@ void setSecret(String secret) {
   issueCommand('add-mask', {}, secret);
 }
 
-/// Prepends inputPath to the PATH
-///
-/// (for this action and future actions)
+/// Prepends inputPath to the PATH (for this action and future actions).
 void addPath({required String path}) {
   final filePath = environmentVariables['GITHUB_PATH'] ?? '';
 
@@ -52,8 +50,8 @@ void addPath({required String path}) {
 
 /// Gets the value of an input.
 ///
-/// Unless trimWhitespace is set to false in [InputOptions], the value is also trimmed.
-/// Returns an empty string if the value is not defined.
+/// Unless trimWhitespace is set to false in [InputOptions], the value is also
+/// trimmed. Returns an empty string if the value is not defined.
 String getInput({
   required String name,
   InputOptions options = const InputOptions(),
@@ -68,7 +66,7 @@ String getInput({
   return options.trimWhitespace ? val.trim() : val;
 }
 
-// Gets the values of a multiline input.  Each value is also trimmed.
+/// Gets the values of a multiline input. Each value is also trimmed.
 Iterable<String> getMultilineInput({
   required String name,
   InputOptions options = const InputOptions(),
