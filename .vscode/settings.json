@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
+        "_GitHubActionsFileCommandDelimeter_",
+        "blockquote",
         "bools",
+        "colspan",
         "cyclomatic",
         "dartanalyzer",
         "dkrutskikh",
@@ -11,9 +14,9 @@
         "nullsafety",
         "prepend",
         "pubspec",
+        "rowspan",
         "todos",
         "unawaited",
-        "writeln",
-        "_GitHubActionsFileCommandDelimeter_"
+        "writeln"
     ]
 }
