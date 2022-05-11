@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+* feat: added `Summary` extension.
+
 ## 0.3.0
 
 * **Breaking Change:** change `setSecret` interface.
