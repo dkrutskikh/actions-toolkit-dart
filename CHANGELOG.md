@@ -1,12 +1,16 @@
 # Changelog
 
+## Unreleased
+
+* fix: [`exportVariable`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/exportVariable.html) crashes
+
 ## 0.4.0
 
-* feat: added `Summary` extension.
+* feat: added [`Summary`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/Summary-class.html) extension.
 
 ## 0.3.0
 
-* **Breaking Change:** change `setSecret` interface.
+* **Breaking Change:** change [`setSecret`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/setSecret.html) interface.
 
 ## 0.2.0
 
