@@ -45,7 +45,7 @@ jobs:
           sdk: "stable"
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
 
       - name: Install dependencies
         run: dart pub get
@@ -59,7 +59,7 @@ jobs:
         run: dart analyze --fatal-warnings --fatal-infos .
 
       - name: Analyze by Dart Code Metrics
-        uses: dart-code-checker/dart-code-metrics-action@v1.5.0
+        uses: dart-code-checker/dart-code-metrics-action@v2.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           folders: "lib, test"
@@ -85,12 +85,12 @@ jobs:
 
     steps:
       - name: Install Stable Dart
-        uses: dart-lang/setup-dart@v1
+        uses: dart-lang/setup-dart@v1.3
         with:
           sdk: "stable"
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
 
       - name: Install dependencies
         run: dart pub get
@@ -100,12 +100,25 @@ jobs:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
         if: success()
         run: |
-          dart test --coverage=coverage
-          dart run coverage:format_coverage --packages=.packages -i coverage -o coverage/coverage.lcov --lcov --report-on=lib
+          dart test --coverage=coverage --reporter=github --file-reporter="json:reports/tests.json"
+          dart run coverage:format_coverage --in coverage --out coverage/coverage.lcov --lcov --report-on=lib
           dart run tool/uncovered_coverage.dart
           dart test test/fake_test.dart --coverage=coverage
-          dart run coverage:format_coverage --packages=.packages -i coverage -o coverage/coverage.lcov --lcov --report-on=lib
+          dart run coverage:format_coverage --in coverage --out coverage/coverage.lcov --lcov --report-on=lib
           bash <(curl -s https://codecov.io/bash) -f coverage/coverage.lcov
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1.5.0
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: Tests result
+          path: reports/tests.json
+          reporter: dart-json
+          list-suites: "all"
+          list-tests: "all"
+          max-annotations: 16
+          fail-on-error: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   check-minimal-supported-dart-compatibility:
     needs: analysis
@@ -113,12 +126,12 @@ jobs:
 
     steps:
       - name: Install Dart 2.12.0
-        uses: dart-lang/setup-dart@v1
+        uses: dart-lang/setup-dart@v1.3
         with:
           sdk: "2.12.0"
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
 
       - name: Install dependencies
         run: dart pub downgrade
@@ -155,12 +168,12 @@ jobs:
 
     steps:
       - name: Install Dart beta
-        uses: dart-lang/setup-dart@v1
+        uses: dart-lang/setup-dart@v1.3
         with:
           sdk: "beta"
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
 
       - name: Install dependencies
         run: dart pub upgrade
