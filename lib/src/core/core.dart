@@ -15,7 +15,6 @@ import 'utils.dart';
 /// Sets env variable for this action and future actions in the job.
 void exportVariable({required String name, required Object value}) {
   final convertedVal = toCommandValue(value);
-  environmentVariables[name] = convertedVal;
 
   final filePath = environmentVariables['GITHUB_ENV'] ?? '';
   if (filePath.isNotEmpty) {
@@ -27,6 +26,8 @@ void exportVariable({required String name, required Object value}) {
   } else {
     issueCommand('set-env', {'name': name}, convertedVal);
   }
+
+  updateEnvironmentVariableCache(name: name, value: convertedVal);
 }
 
 /// Registers a secret which will get masked from logs.
@@ -44,8 +45,10 @@ void addPath({required String path}) {
     issueCommand('add-path', {}, path);
   }
 
-  environmentVariables['PATH'] =
-      '$path${p.context.separator}${environmentVariables['PATH']}';
+  updateEnvironmentVariableCache(
+    name: 'PATH',
+    value: '$path${p.context.separator}${environmentVariables['PATH']}',
+  );
 }
 
 /// Gets the value of an input.
