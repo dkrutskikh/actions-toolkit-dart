@@ -1,8 +1,12 @@
 # Changelog
 
+## Unreleased
+
+* feat: added `toPosixPath`, `toWin32Path` and `toPlatformPath` utilities.
+
 ## 0.4.1
 
-* fix: [`exportVariable`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/exportVariable.html) crashes
+* fix: [`exportVariable`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/exportVariable.html) crashes.
 
 ## 0.4.0
 
@@ -14,7 +18,7 @@
 
 ## 0.2.0
 
-* feat: added support for notice annotations and more annotation fields
+* feat: added support for notice annotations and more annotation fields.
 
 ## 0.1.0
 

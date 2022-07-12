@@ -19,7 +19,7 @@ void exportVariable({required String name, required Object value}) {
   final filePath = environmentVariables['GITHUB_ENV'] ?? '';
   if (filePath.isNotEmpty) {
     const delimiter = '_GitHubActionsFileCommandDelimeter_';
-    final separator = p.context.separator;
+    final separator = p.separator;
     final commandValue =
         '$name<<$delimiter$separator$convertedVal$separator$delimiter';
     issueFileCommand('ENV', commandValue);
@@ -47,7 +47,7 @@ void addPath({required String path}) {
 
   updateEnvironmentVariableCache(
     name: 'PATH',
-    value: '$path${p.context.separator}${environmentVariables['PATH']}',
+    value: '$path${p.separator}${environmentVariables['PATH']}',
   );
 }
 

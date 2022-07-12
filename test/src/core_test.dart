@@ -16,7 +16,7 @@ class IOSinkMock extends Mock implements IOSink {}
 const message = 'simple message';
 
 final testEnvVars = {
-  'PATH': 'path1${p.context.separator}path2',
+  'PATH': 'path1${p.separator}path2',
 
   // Set inputs.
   'INPUT_MY_INPUT': 'val',
@@ -126,10 +126,7 @@ void main() {
 
         expect(
           core.environmentVariables,
-          containsPair(
-            'PATH',
-            'myPath${p.context.separator}path1${p.context.separator}path2',
-          ),
+          containsPair('PATH', 'myPath${p.separator}path1${p.separator}path2'),
         );
 
         expect(

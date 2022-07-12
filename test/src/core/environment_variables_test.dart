@@ -6,7 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 
 final testEnvVars = {
-  'PATH': 'path1${p.context.separator}path2',
+  'PATH': 'path1${p.separator}path2',
 
   // Set inputs.
   'INPUT_MY_INPUT': 'val',
