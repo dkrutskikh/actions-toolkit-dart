@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.1
 
 * fix: [`exportVariable`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/exportVariable.html) provide write command.
 

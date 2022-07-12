@@ -28,7 +28,7 @@ add it manually to `pubspec.yaml`
 
 ```yaml
 dependencies:
-  actions_toolkit_dart: ^0.5.0
+  actions_toolkit_dart: ^0.5.1
 ```
 
 #### Import the package
