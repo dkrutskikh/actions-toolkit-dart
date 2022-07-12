@@ -3,6 +3,7 @@
 ## Unreleased
 
 * feat: added `toPosixPath`, `toWin32Path` and `toPlatformPath` utilities.
+* fix: internal function `issueFileCommand`.
 
 ## 0.4.1
 

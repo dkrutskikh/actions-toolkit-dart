@@ -12,7 +12,7 @@ void issueFileCommand(String command, Object message) {
   }
 
   final file = File(filePath);
-  if (file.existsSync()) {
+  if (!file.existsSync()) {
     throw ArgumentError('Missing file at path: $filePath');
   }
 
