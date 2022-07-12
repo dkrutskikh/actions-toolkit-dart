@@ -13,6 +13,7 @@
         "lcov",
         "mocktail",
         "nullsafety",
+        "posix",
         "prepend",
         "pubspec",
         "rowspan",
