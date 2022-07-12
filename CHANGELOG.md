@@ -1,8 +1,12 @@
 # Changelog
 
+## Unreleased
+
+* fix: [`exportVariable`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/exportVariable.html) provide write command.
+
 ## 0.5.0
 
-* feat: added `toPosixPath`, `toWin32Path` and `toPlatformPath` utilities.
+* feat: added [`toPosixPath`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/toPosixPath.html), [`toWin32Path`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/toWin32Path.html) and [`toPlatformPath`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/toPlatformPath.html) utilities.
 * fix: internal function `issueFileCommand`.
 
 ## 0.4.1
