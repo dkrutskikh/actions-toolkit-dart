@@ -19,7 +19,7 @@ void exportVariable({required String name, required Object value}) {
   final filePath = environmentVariables['GITHUB_ENV'] ?? '';
   if (filePath.isNotEmpty) {
     const delimiter = '_GitHubActionsFileCommandDelimeter_';
-    final separator = p.separator;
+    const separator = '\n';
     final commandValue =
         '$name<<$delimiter$separator$convertedVal$separator$delimiter';
     issueFileCommand('ENV', commandValue);
