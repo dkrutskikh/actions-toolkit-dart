@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-* fix: internal function [`exportVariable`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/exportVariable.html).
+* fix: [`exportVariable`](https://pub.dev/documentation/actions_toolkit_dart/latest/core/exportVariable.html) provide write command.
 
 ## 0.5.0
 
