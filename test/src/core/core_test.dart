@@ -251,7 +251,7 @@ void main() {
       );
     });
 
-    test('setOutput produces the correct command', () {
+    test('legacy setOutput produces the correct command', () {
       core.setOutput(name: 'some output', value: 'some value');
 
       expect(
@@ -260,7 +260,7 @@ void main() {
       );
     });
 
-    test('setOutput handles bools', () {
+    test('legacy setOutput handles bools', () {
       core.setOutput(name: 'some output', value: false);
 
       expect(
@@ -269,7 +269,7 @@ void main() {
       );
     });
 
-    test('setOutput handles numbers', () {
+    test('legacy setOutput handles numbers', () {
       core.setOutput(name: 'some output', value: 1.01);
 
       expect(
@@ -469,7 +469,7 @@ void main() {
       );
     });
 
-    test('saveState produces the correct command', () {
+    test('legacy saveState produces the correct command', () {
       core.saveState(name: 'state_1', value: 'some value');
 
       expect(
@@ -478,7 +478,7 @@ void main() {
       );
     });
 
-    test('saveState handles numbers', () {
+    test('legacy saveState handles numbers', () {
       core.saveState(name: 'state_1', value: 1);
 
       expect(
@@ -487,7 +487,7 @@ void main() {
       );
     });
 
-    test('saveState handles bools', () {
+    test('legacy saveState handles bools', () {
       core.saveState(name: 'state_1', value: true);
 
       expect(
