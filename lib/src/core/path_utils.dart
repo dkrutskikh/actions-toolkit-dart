@@ -14,7 +14,6 @@ String toWin32Path(String pth) => pth.replaceAll('/', r'\');
 ///
 /// It does this by replacing instances of `/` and `\` with the
 /// platform-specific path separator.
-// ignore: prefer_expression_function_bodies
 String toPlatformPath(String pth) {
   final separator = p.separator;
 
