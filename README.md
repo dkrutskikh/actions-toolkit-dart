@@ -1,4 +1,4 @@
-[![Build Status](https://shields.io/github/workflow/status/dkrutskikh/actions-toolkit-dart/build?logo=github&logoColor=white)](https://github.com/dkrutskikh/actions-toolkit-dart/)
+[![Build Status](https://shields.io/github/actions/workflow/status/dkrutskikh/actions-toolkit-dart/package_analyze.yaml?logo=github&logoColor=white&branch=main)](https://github.com/dkrutskikh/actions-toolkit-dart/)
 [![Coverage Status](https://img.shields.io/codecov/c/github/dkrutskikh/actions-toolkit-dart?logo=codecov&logoColor=white)](https://codecov.io/gh/dkrutskikh/actions-toolkit-dart/)
 [![Pub Version](https://img.shields.io/pub/v/actions_toolkit_dart?logo=dart&logoColor=white)](https://pub.dev/packages/actions_toolkit_dart/)
 [![Dart SDK Version](https://badgen.net/pub/sdk-version/actions_toolkit_dart)](https://pub.dev/packages/actions_toolkit_dart/)
