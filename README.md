@@ -19,7 +19,7 @@ A third-party toolkit for [GitHub Actions](https://help.github.com/en/actions) w
 #### Installation
 
 ```sh
-$ dart pub add actions_toolkit_dart
+dart pub add actions_toolkit_dart
 ```
 
 **OR**
