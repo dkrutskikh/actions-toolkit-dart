@@ -104,13 +104,20 @@ bool getBooleanInput({
 
 /// Sets the value of an output.
 void setOutput({required String name, required Object value}) {
-  output.writeln('');
+  final filePath = Platform.environment['GITHUB_OUTPUT'] ?? '';
+  final message = value is String ? value : jsonEncode(value);
 
-  issueCommand(
-    'set-output',
-    {'name': name},
-    value is String ? value : jsonEncode(value),
-  );
+  if (filePath.isNotEmpty) {
+    issueFileCommand('OUTPUT', '$name=$message');
+  } else {
+    output.writeln('');
+
+    issueCommand(
+      'set-output',
+      {'name': name},
+      message,
+    );
+  }
 }
 
 /// Enables or disables the echoing of commands into stdout for the rest of the step.
@@ -208,11 +215,18 @@ void saveState({
   required String name,
   required Object value,
 }) {
-  issueCommand(
-    'save-state',
-    {'name': name},
-    value is String ? value : jsonEncode(value),
-  );
+  final filePath = Platform.environment['GITHUB_STATE'] ?? '';
+  final message = value is String ? value : jsonEncode(value);
+
+  if (filePath.isNotEmpty) {
+    issueFileCommand('STATE', '$name=$message');
+  } else {
+    issueCommand(
+      'save-state',
+      {'name': name},
+      message,
+    );
+  }
 }
 
 /// Gets the value of an state set by this action's main execution.
