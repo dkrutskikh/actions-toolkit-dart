@@ -32,7 +32,9 @@ dart_code_metrics:
   metrics-exclude:
     - test/**
   rules:
+    - avoid-cascade-after-if-null
     - avoid-collection-methods-with-unrelated-types
+    - avoid-double-slash-imports
     - avoid-dynamic:
         exclude:
           - test/**
@@ -41,12 +43,12 @@ dart_code_metrics:
         exclude:
           - test/**
     - avoid-missing-enum-constant-in-map
+    - avoid-unnecessary-conditionals
     - avoid-unnecessary-type-assertions
     - avoid-unnecessary-type-casts
     - avoid-unused-parameters
     - binary-expression-operand-order
     - double-literal-format
-    - format-comment
     - newline-before-return
     - no-boolean-literal-compare
     - no-empty-block
@@ -119,7 +121,7 @@ linter:
     - do_not_use_environment
     - eol_at_end_of_file
     - flutter_style_todos
-    - invariant_booleans
+    #   - invariant_booleans
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
     #    - lines_longer_than_80_chars

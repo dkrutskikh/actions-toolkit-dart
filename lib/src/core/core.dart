@@ -81,7 +81,7 @@ Iterable<String> getMultilineInput({
 
 /// Gets the input value of the boolean type in the [YAML 1.2](https://yaml.org/spec/1.2/spec.html#id2804923) "core schema" specification.
 ///
-/// Supported boolean input list: `true | True | TRUE | false | False | FALSE` .
+/// Supported boolean input list: `true | True | TRUE | false | False | FALSE`.
 bool getBooleanInput({
   required String name,
   InputOptions options = const InputOptions(),
